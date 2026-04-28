@@ -1,79 +1,85 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="animate-up delay-1" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2.5rem;">
-    <h2 style="font-size: 2.2rem; font-weight: 800;">Welcome, <span class="text-gradient">{{ current_user.full_name }}</span></h2>
+<div class="dashboard-head animate-up delay-1">
+    <h2>Dashboard: <span class="welcome-name">{{ current_user.full_name }}</span></h2>
     <div class="points-badge">
         ✦ {{ current_user.points }} PTS
     </div>
 </div>
 
 <div class="card animate-up delay-2">
-    <h3 style="color: var(--icpc-gold); font-size: 1.8rem; margin-bottom: 0.5rem; letter-spacing: -0.5px;">Active Challenge</h3>
-    
+    <h3 style="color: var(--icpc-gold); font-size: 1.8rem; margin-bottom: 0.5rem; letter-spacing: -0.5px;">Active
+        Challenge</h3>
+
     {% if problem %}
-        <div style="font-size: 1.4rem; font-weight: 700; color: var(--text-main); margin-bottom: 1rem;">
-            {{ problem.title }}
-        </div>
-        
-        <div class="problem-box">
-            {{ problem.statement | safe }}
-        </div>
-        
-        {% if already_solved %}
-            <div class="alert alert-success">
-                <strong>Status: Solved!</strong> You have successfully solved this problem and earned your points.
-            </div>
-        {% else %}
-            <div class="alert alert-warning">
-                <strong>Status: Unsolved</strong> Submit your correct answer below to earn 100 points!
-            </div>
-            
-            <form method="POST" action="{{ url_for('main.dashboard') }}" style="max-width: 600px; margin-top: 2rem;">
-                <div class="form-group">
-                    <label class="form-label" style="color: var(--icpc-gold);">Your Solution</label>
-                    <input class="form-control" type="text" name="answer" placeholder="Enter your final output here..." required>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit Answer</button>
-            </form>
-        {% endif %}
-        
-        {% if submissions %}
-            <div style="margin-top: 4rem;">
-                <h4 style="color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; margin-bottom: 1rem;">Submission History</h4>
-                <div style="overflow-x: auto;">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Timestamp (UTC)</th>
-                                <th>Submitted Answer</th>
-                                <th>Result</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for sub in submissions %}
-                                <tr>
-                                    <td style="color: var(--text-muted); font-family: monospace;">{{ sub.submission_time.strftime('%Y-%m-%d %H:%M:%S') }}</td>
-                                    <td style="font-weight: 500;">{{ sub.answer }}</td>
-                                    <td>
-                                        {% if sub.is_correct %}
-                                            <span style="color: #34d399; font-weight: 800; text-shadow: 0 0 10px rgba(52,211,153,0.4);">Correct</span>
-                                        {% else %}
-                                            <span style="color: #f87171; font-weight: 600;">Incorrect</span>
-                                        {% endif %}
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        {% endif %}
-        
+    <div style="font-size: 1.4rem; font-weight: 700; color: var(--text-main); margin-bottom: 1rem;">
+        {{ problem.title }}
+    </div>
+
+    <div class="problem-box">
+        {{ problem.statement | safe }}
+    </div>
+
+    {% if already_solved %}
+    <div class="alert alert-success">
+        <strong>Status: Solved!</strong> You have successfully solved this problem and earned your points.
+    </div>
     {% else %}
-        <div class="alert alert-info" style="margin-top: 1rem;">
-            There is currently no active weekly problem. Take a break or check out the Resources!
+    <div class="alert alert-warning">
+        <strong>Status: Unsolved</strong> Submit your correct answer below to earn 100 points!
+    </div>
+
+    <form method="POST" action="{{ url_for('main.dashboard') }}" style="max-width: 600px; margin-top: 2rem;">
+        <div class="form-group">
+            <label class="form-label" style="color: var(--icpc-gold);">Your Solution</label>
+            <input class="form-control" type="text" name="answer" placeholder="Enter your final output here..."
+                required>
         </div>
+        <button type="submit" class="btn btn-primary">Submit Answer</button>
+    </form>
+    {% endif %}
+
+    {% if submissions %}
+    <div style="margin-top: 4rem;">
+        <h4
+            style="color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; margin-bottom: 1rem;">
+            Submission History</h4>
+        <div style="overflow-x: auto;">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Timestamp (UTC)</th>
+                        <th>Submitted Answer</th>
+                        <th>Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for sub in submissions %}
+                    <tr>
+                        <td style="color: var(--text-muted); font-family: monospace;">{{
+                            sub.submission_time.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                        <td style="font-weight: 500;">{{ sub.answer }}</td>
+                        <td>
+                            {% if sub.is_correct %}
+                            <span
+                                style="color: #34d399; font-weight: 800; text-shadow: 0 0 10px rgba(52,211,153,0.4);">Correct</span>
+                            {% else %}
+                            <span style="color: #f87171; font-weight: 600;">Incorrect</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endif %}
+
+    {% else %}
+    <div class="alert alert-info" style="margin-top: 1rem;">
+        There is currently no active weekly problem. Take a break or check out the Resources!
+    </div>
     {% endif %}
 </div>
 {% endblock %}

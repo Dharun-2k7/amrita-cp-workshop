@@ -1,26 +1,30 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div style="max-width: 500px; margin: 0 auto;" class="animate-up delay-1">
-    <div class="card" style="border-top: 4px solid var(--icpc-blue-light);">
-        <h2 style="text-align: center; margin-bottom: 2rem; font-size: 2rem;" class="text-gradient">Welcome Back</h2>
-        
+<div class="auth-wrap animate-up delay-1">
+    <div class="card">
+        <span class="section-eyebrow" style="text-align: center; display: block;">Member Access</span>
+        <h2 class="auth-title text-gradient">Welcome Back</h2>
+        <p class="auth-sub">Sign in to continue your weekly challenge streak.</p>
+
         <form method="POST" action="{{ url_for('main.login') }}">
             <div class="form-group">
                 <label class="form-label" for="email">Email Address</label>
-                <input class="form-control" type="email" id="email" name="email" placeholder="you@university.edu" required>
+                <input class="form-control" type="email" id="email" name="email" placeholder="you@university.edu"
+                    required>
             </div>
-            
+
             <div class="form-group">
                 <label class="form-label" for="password">Password</label>
-                <input class="form-control" type="password" id="password" name="password" placeholder="••••••••" required>
+                <input class="form-control" type="password" id="password" name="password" placeholder="••••••••"
+                    required>
             </div>
-            
+
             <button type="submit" class="btn btn-primary btn-block" style="margin-top: 1.5rem;">Sign In</button>
         </form>
-        
-        <p style="text-align: center; margin-top: 2rem; color: var(--text-muted);">
-            New here? <a href="{{ url_for('main.register') }}" style="color: var(--icpc-gold); text-decoration: none; font-weight: 600;">Create an account</a>
+
+        <p class="auth-footer">
+            New here? <a href="{{ url_for('main.register') }}">Create an account</a>
         </p>
     </div>
 </div>

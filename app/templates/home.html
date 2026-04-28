@@ -1,38 +1,38 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="card animate-up delay-1" style="text-align: center; padding: 4rem 2rem; border-top: 4px solid var(--icpc-gold);">
-    <h1 style="font-size: 3rem; margin-bottom: 1.5rem; letter-spacing: -1px;">
-        Master Algorithms.<br>
-        <span class="text-gradient">Dominate Contests.</span>
-    </h1>
-    <p style="font-size: 1.25rem; color: var(--text-muted); max-width: 700px; margin: 0 auto 2.5rem auto;">
-        Join the official ICPC Club Platform. Solve weekly algorithmic challenges, track your progress on the global leaderboard, and learn from top competitive programmers.
+<div class="card animate-up delay-1 page-hero">
+    <span class="section-eyebrow">Post Workshop Arena</span>
+    <h1>ICPC Problem Solving Hub</h1>
+    <p>
+        Train with high-signal weekly problems, build contest instincts, and climb a live leaderboard.
+        The platform is optimized for first-principles thinking and performance under pressure.
     </p>
-    
-    <div style="display: flex; justify-content: center; gap: 1rem;">
+    <div class="hero-actions">
         {% if not current_user.is_authenticated %}
-            <a href="{{ url_for('main.register') }}" class="btn btn-primary">Start Coding Now</a>
-            <a href="{{ url_for('main.login') }}" class="btn nav-btn-outline">Sign In</a>
+        <a href="{{ url_for('main.register') }}" class="btn btn-primary">Start Solving</a>
+        <a href="{{ url_for('main.login') }}" class="btn nav-btn-outline">Sign In</a>
         {% else %}
-            <a href="{{ url_for('main.dashboard') }}" class="btn btn-primary">Enter Dashboard</a>
+        <a href="{{ url_for('main.dashboard') }}" class="btn btn-primary">Enter Dashboard</a>
         {% endif %}
     </div>
 </div>
 
-<div class="grid-2" style="margin-top: 3rem;">
-    <div class="card animate-up delay-2">
-        <h3 style="color: var(--icpc-red); font-size: 1.5rem;">🔥 Weekly Challenges</h3>
-        <p style="color: var(--text-muted); margin-top: 1rem;">
-            New, hand-crafted algorithmic problems released every week. Write optimal solutions, submit your answers, and earn points for the first correct solve.
-        </p>
-    </div>
-    
-    <div class="card animate-up delay-3">
-        <h3 style="color: var(--icpc-gold); font-size: 1.5rem;">🏆 Competitive Leaderboard</h3>
-        <p style="color: var(--text-muted); margin-top: 1rem;">
-            See how you rank against your peers. The leaderboard is driven by points and speed, pushing you to code faster and smarter.
-        </p>
+<div class="card animate-up delay-2">
+    <span class="section-eyebrow">What You Get</span>
+    <div class="feature-list">
+        <div class="feature-item">
+            <h3>Weekly Challenges</h3>
+            <p>Curated algorithmic problems with clear evaluation and fast scoring feedback.</p>
+        </div>
+        <div class="feature-item">
+            <h3>Live Ranking</h3>
+            <p>Compete on speed and correctness with transparent ranking updates.</p>
+        </div>
+        <div class="feature-item">
+            <h3>Focused Growth</h3>
+            <p>Practice in a contest-like environment designed for ICPC-style thinking.</p>
+        </div>
     </div>
 </div>
 {% endblock %}

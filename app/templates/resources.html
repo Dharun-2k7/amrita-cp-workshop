@@ -1,33 +1,136 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="animate-up delay-1" style="text-align: center; margin-bottom: 3rem;">
-    <h1 style="font-size: 2.8rem; margin-bottom: 1rem;" class="text-gradient">Training Grounds</h1>
-    <p style="color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto;">
-        Level up your algorithm skills with the best resources available on the internet.
+<div class="animate-up delay-1 page-hero">
+    <span class="section-eyebrow">Learning Hub</span>
+    <h1 class="mega-title">Syllabus</h1>
+    <p>
+        A structured list of resources and platforms to move from fundamentals to advanced contest performance.
     </p>
 </div>
 
-<div class="grid-2">
-    <div class="card animate-up delay-2" style="border-top: 4px solid var(--icpc-gold);">
-        <h3 style="color: white; font-size: 1.5rem; margin-bottom: 1.5rem;">📚 Theory & Algorithms</h3>
-        <ul class="resource-list">
-            <li><a href="https://usaco.guide/" target="_blank">USACO Guide</a></li>
-            <li><a href="https://cp-algorithms.com/" target="_blank">CP Algorithms</a></li>
-            <li><a href="https://cses.fi/book/book.pdf" target="_blank">Competitive Programmer's Handbook</a></li>
-            <li><a href="https://www.geeksforgeeks.org/fundamentals-of-algorithms/" target="_blank">GeeksforGeeks Algorithms</a></li>
-        </ul>
+<div class="section-heading animate-up delay-2">
+    <h2><span class="icon">01</span> Theory & Algorithms</h2>
+</div>
+<div class="syllabus-table animate-up delay-3">
+    <div class="syllabus-table-head">
+        <span>Platform</span>
+        <span>Focus Area</span>
+        <span>Access</span>
     </div>
-    
-    <div class="card animate-up delay-3" style="border-top: 4px solid var(--icpc-red);">
-        <h3 style="color: white; font-size: 1.5rem; margin-bottom: 1.5rem;">⚔️ Practice Arenas</h3>
-        <ul class="resource-list">
-            <li><a href="https://codeforces.com/" target="_blank">Codeforces</a></li>
-            <li><a href="https://atcoder.jp/" target="_blank">AtCoder</a></li>
-            <li><a href="https://cses.fi/problemset/" target="_blank">CSES Problem Set</a></li>
-            <li><a href="https://projecteuler.net/" target="_blank">Project Euler</a></li>
-            <li><a href="https://leetcode.com/" target="_blank">LeetCode</a></li>
-        </ul>
+    <div class="syllabus-table-body">
+        <div class="syllabus-table-row">
+            <div class="platform-cell">
+                <img class="resource-logo-img" src="https://www.google.com/s2/favicons?domain=usaco.guide&sz=64" alt="USACO Guide logo">
+                <div>
+                    <h3>USACO Guide</h3>
+                    <p>Structured roadmap from beginner to advanced CP.</p>
+                </div>
+            </div>
+            <div class="focus-cell">Data structures, graph theory, dynamic programming tracks.</div>
+            <div><a href="https://usaco.guide/" target="_blank" class="resource-btn">Open</a></div>
+        </div>
+        <div class="syllabus-table-row">
+            <div class="platform-cell">
+                <img class="resource-logo-img" src="https://www.google.com/s2/favicons?domain=cp-algorithms.com&sz=64" alt="CP Algorithms logo">
+                <div>
+                    <h3>CP Algorithms</h3>
+                    <p>Reference notes used by top contestants worldwide.</p>
+                </div>
+            </div>
+            <div class="focus-cell">Algorithm proofs, templates, implementation details.</div>
+            <div><a href="https://cp-algorithms.com/" target="_blank" class="resource-btn">Open</a></div>
+        </div>
+        <div class="syllabus-table-row">
+            <div class="platform-cell">
+                <img class="resource-logo-img" src="https://www.google.com/s2/favicons?domain=cses.fi&sz=64" alt="CP Handbook logo">
+                <div>
+                    <h3>CP Handbook</h3>
+                    <p>Clean foundational book for contest preparation.</p>
+                </div>
+            </div>
+            <div class="focus-cell">Core methods, complexity intuition, classic problem types.</div>
+            <div><a href="https://cses.fi/book/book.pdf" target="_blank" class="resource-btn">Open</a></div>
+        </div>
+        <div class="syllabus-table-row">
+            <div class="platform-cell">
+                <img class="resource-logo-img" src="https://www.google.com/s2/favicons?domain=geeksforgeeks.org&sz=64" alt="GeeksforGeeks logo">
+                <div>
+                    <h3>GeeksforGeeks</h3>
+                    <p>Large practical archive for concept reinforcement.</p>
+                </div>
+            </div>
+            <div class="focus-cell">Concept revision, language basics, interview-style drills.</div>
+            <div><a href="https://www.geeksforgeeks.org/fundamentals-of-algorithms/" target="_blank" class="resource-btn">Open</a></div>
+        </div>
+    </div>
+</div>
+
+<div class="section-heading animate-up delay-4" style="margin-top: 2rem;">
+    <h2><span class="icon">02</span> Practice Arenas</h2>
+</div>
+<div class="syllabus-table animate-up delay-5">
+    <div class="syllabus-table-head">
+        <span>Platform</span>
+        <span>Focus Area</span>
+        <span>Access</span>
+    </div>
+    <div class="syllabus-table-body">
+        <div class="syllabus-table-row">
+            <div class="platform-cell">
+                <img class="resource-logo-img" src="https://www.google.com/s2/favicons?domain=codeforces.com&sz=64" alt="Codeforces logo">
+                <div>
+                    <h3>Codeforces</h3>
+                    <p>Frequent rated contests and deep archive of problems.</p>
+                </div>
+            </div>
+            <div class="focus-cell">Speed, implementation skill, contest pressure handling.</div>
+            <div><a href="https://codeforces.com/" target="_blank" class="resource-btn">Open</a></div>
+        </div>
+        <div class="syllabus-table-row">
+            <div class="platform-cell">
+                <img class="resource-logo-img" src="https://www.google.com/s2/favicons?domain=atcoder.jp&sz=64" alt="AtCoder logo">
+                <div>
+                    <h3>AtCoder</h3>
+                    <p>High-quality tasks with strong math and algorithm depth.</p>
+                </div>
+            </div>
+            <div class="focus-cell">Precise reasoning, optimization, clean editorial style.</div>
+            <div><a href="https://atcoder.jp/" target="_blank" class="resource-btn">Open</a></div>
+        </div>
+        <div class="syllabus-table-row">
+            <div class="platform-cell">
+                <img class="resource-logo-img" src="https://www.google.com/s2/favicons?domain=cses.fi&sz=64" alt="CSES logo">
+                <div>
+                    <h3>CSES Problem Set</h3>
+                    <p>Curated standard set ideal for systematic progress.</p>
+                </div>
+            </div>
+            <div class="focus-cell">Classic CP patterns and baseline mastery.</div>
+            <div><a href="https://cses.fi/problemset/" target="_blank" class="resource-btn">Open</a></div>
+        </div>
+        <div class="syllabus-table-row">
+            <div class="platform-cell">
+                <img class="resource-logo-img" src="https://www.google.com/s2/favicons?domain=projecteuler.net&sz=64" alt="Project Euler logo">
+                <div>
+                    <h3>Project Euler</h3>
+                    <p>Math-heavy puzzles that sharpen insight and creativity.</p>
+                </div>
+            </div>
+            <div class="focus-cell">Number theory and elegant problem decomposition.</div>
+            <div><a href="https://projecteuler.net/" target="_blank" class="resource-btn">Open</a></div>
+        </div>
+        <div class="syllabus-table-row">
+            <div class="platform-cell">
+                <img class="resource-logo-img" src="https://www.google.com/s2/favicons?domain=leetcode.com&sz=64" alt="LeetCode logo">
+                <div>
+                    <h3>LeetCode</h3>
+                    <p>Structured coding practice for interviews and speed drills.</p>
+                </div>
+            </div>
+            <div class="focus-cell">Interview patterns, timed practice, consistency.</div>
+            <div><a href="https://leetcode.com/" target="_blank" class="resource-btn">Open</a></div>
+        </div>
     </div>
 </div>
 {% endblock %}

@@ -1,20 +1,21 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div style="max-width: 450px; margin: 0 auto;" class="animate-up delay-1">
-    <div class="card" style="border-top: 4px solid var(--icpc-gold);">
-        <h2 style="text-align: center; margin-bottom: 1rem; font-size: 2rem;" class="text-gradient">Verification</h2>
-        
-        <p style="text-align: center; margin-bottom: 2rem; color: var(--text-muted);">
+<div class="auth-wrap animate-up delay-1" style="max-width: 450px;">
+    <div class="card">
+        <span class="section-eyebrow" style="text-align: center; display: block;">Secure Access</span>
+        <h2 class="auth-title text-gradient">Verification</h2>
+
+        <p class="auth-sub">
             We sent a secure 6-digit code to <br><strong style="color: white;">{{ email }}</strong>. 
         </p>
-        
+
         <form method="POST" action="{{ url_for('main.verify') }}">
             <div class="form-group">
                 <label class="form-label" style="text-align: center;" for="otp">Enter your code</label>
-                <input class="form-control" type="text" id="otp" name="otp" placeholder="123456" required autocomplete="off" style="text-align: center; font-size: 1.5rem; letter-spacing: 4px; font-weight: bold;">
+                <input class="form-control otp-input" type="text" id="otp" name="otp" placeholder="123456" required autocomplete="off">
             </div>
-            
+
             <button type="submit" class="btn btn-primary btn-block" style="margin-top: 1rem;">Confirm Identity</button>
         </form>
     </div>
