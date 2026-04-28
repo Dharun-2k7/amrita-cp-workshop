@@ -47,4 +47,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const animatedElements = document.querySelectorAll('.animate-on-scroll');
     animatedElements.forEach(el => observer.observe(el));
+
+    // 3. Mobile Navigation Toggle
+    const mobileToggle = document.getElementById('mobile-toggle');
+    const navbarNav = document.querySelector('.navbar-nav');
+    
+    if (mobileToggle && navbarNav) {
+        mobileToggle.addEventListener('click', () => {
+            mobileToggle.classList.toggle('toggle-active');
+            navbarNav.classList.toggle('nav-active');
+        });
+    }
 });
