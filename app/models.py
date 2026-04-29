@@ -30,6 +30,7 @@ class Problem(db.Model):
     correct_answer = db.Column(db.String(200), nullable=False)
     start_time = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
     end_time = db.Column(db.DateTime, nullable=True)
+    scheduled_for = db.Column(db.DateTime, nullable=True)
     is_active = db.Column(db.Boolean, default=False)
     submissions = db.relationship('Submission', backref='problem', lazy=True)
 

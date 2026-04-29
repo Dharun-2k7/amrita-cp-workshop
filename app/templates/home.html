@@ -13,13 +13,14 @@
         <a href="{{ url_for('main.register') }}" class="btn btn-primary">Start Solving</a>
         <a href="{{ url_for('main.login') }}" class="btn nav-btn-outline">Sign In</a>
         {% else %}
-        <a href="{{ url_for('main.dashboard') }}" class="btn btn-primary">Enter Dashboard</a>
+        <a href="{{ url_for('main.dashboard') }}" class="btn btn-primary">Problem of the Week</a>
         {% endif %}
     </div>
 </div>
 
-<div class="card animate-up delay-2">
-    <span class="section-eyebrow">What You Get</span>
+<div class="card scroll-animate">
+    <h2 class="text-gradient" style="margin-bottom: 0.2rem;">Platform Features</h2>
+    <span class="section-eyebrow" style="margin-bottom: 2rem; display: inline-block;">What You Get</span>
     <div class="feature-list">
         <div class="feature-item">
             <h3>Weekly Challenges</h3>
@@ -36,7 +37,8 @@
     </div>
 </div>
 
-<div class="benefits card animate-up delay-3">
+<div class="benefits card scroll-animate" style="margin-top: 2rem;">
+    <h2 class="text-gradient" style="margin-bottom: 0.2rem;">The IOI Advantage</h2>
     <span class="section-eyebrow">Why IOI for 9-12th Graders?</span>
     <div class="feature-list">
         <div class="feature-item">

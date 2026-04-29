@@ -7,7 +7,7 @@
     <p>Manage problems, set active challenges, and monitor the platform.</p>
 </div>
 
-<div class="grid-2">
+<div style="display: flex; flex-direction: column; gap: 2rem; max-width: 900px; margin: 0 auto;">
     <!-- Create Problem -->
     <div class="card animate-up delay-2">
         <h2 class="text-gradient">Create New Problem</h2>
@@ -48,7 +48,13 @@
                 <input type="text" name="correct_answer" class="form-control" required placeholder="0,1">
             </div>
 
-            <button type="submit" class="btn btn-primary btn-block">Create & Set Active</button>
+            <div class="form-group">
+                <label class="form-label">Schedule Active Time (Optional)</label>
+                <input type="datetime-local" name="scheduled_for" class="form-control" style="color-scheme: dark;">
+                <small style="color: var(--text-muted); margin-top: 0.5rem; display: block;">If set, the problem will not be active immediately but will unlock automatically at this time.</small>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">Create Problem</button>
         </form>
 
         <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
@@ -96,8 +102,10 @@
                 <div style="display: flex; justify-content: space-between; align-items: start;">
                     <div>
                         <h3 style="margin-bottom: 0.5rem; color: #fff;">{{ problem.title }}</h3>
-                        <p style="font-size: 0.85rem; color: var(--text-muted);">Answer: {{ problem.correct_answer }}
-                        </p>
+                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.3rem;">Answer: {{ problem.correct_answer }}</p>
+                        {% if problem.scheduled_for %}
+                        <p style="font-size: 0.8rem; color: var(--icpc-gold);"><i class="icon">⏰</i> Scheduled for: {{ problem.scheduled_for.strftime('%Y-%m-%d %H:%M:%S UTC') }}</p>
+                        {% endif %}
                     </div>
                     <form method="POST" action="{{ url_for('main.toggle_problem', problem_id=problem.id) }}">
                         <button type="submit" class="btn {{ btn_class }}" style="padding: 0.4rem 1rem; font-size: 0.8rem;">

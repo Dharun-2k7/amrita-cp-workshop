@@ -2,15 +2,20 @@
 
 {% block content %}
 <div class="dashboard-head animate-up delay-1">
-    <h2>Dashboard: <span class="welcome-name">{{ current_user.full_name }}</span></h2>
-    <div class="points-badge">
-        ✦ {{ current_user.points }} PTS
+    <h2>Problem of the Week</h2>
+    <div style="font-size: 1.1rem; color: var(--text-muted); margin-bottom: 1rem;">
+        Welcome, <span class="welcome-name text-gradient" style="font-weight: 700;">{{ current_user.full_name }}</span>
+    </div>
+    <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+        <div class="points-badge">
+            ✦ {{ current_user.points }} PTS
+        </div>
+        <a href="{{ url_for('main.archives') }}" class="btn nav-btn-outline" style="font-size: 0.9rem; padding: 0.4rem 1rem;">View Problem Archives</a>
     </div>
 </div>
 
 <div class="card animate-up delay-2">
-    <h3 style="color: var(--icpc-gold); font-size: 1.8rem; margin-bottom: 0.5rem; letter-spacing: -0.5px;">Active
-        Challenge</h3>
+    <h3 style="color: var(--icpc-gold); font-size: 1.8rem; margin-bottom: 0.5rem; letter-spacing: -0.5px;">Active Challenge</h3>
 
     {% if problem %}
     <div style="font-size: 1.4rem; font-weight: 700; color: var(--text-main); margin-bottom: 1rem;">
@@ -76,6 +81,42 @@
     </div>
     {% endif %}
 
+    {% elif scheduled_problem %}
+    <div class="alert alert-info" style="margin-top: 1rem; text-align: center; padding: 3rem;">
+        <h3 style="color: var(--text-main); margin-bottom: 1rem;">Next Problem Unlocks In</h3>
+        <div id="countdown" style="font-size: 3rem; font-family: monospace; font-weight: 800; color: var(--icpc-gold); letter-spacing: 4px; text-shadow: 0 0 20px rgba(16, 185, 129, 0.4);">
+            --:--:--
+        </div>
+        <p style="color: var(--text-muted); margin-top: 1rem;">Get ready to solve!</p>
+    </div>
+    <script>
+        // Countdown timer logic
+        const scheduledTime = new Date("{{ scheduled_problem.scheduled_for.isoformat() }}Z").getTime();
+        
+        const countdownInterval = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = scheduledTime - now;
+            
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                document.getElementById("countdown").innerHTML = "00:00:00";
+                setTimeout(() => window.location.reload(), 2000); // Reload to show the active problem
+            } else {
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                
+                let displayStr = "";
+                if (days > 0) displayStr += days + "d ";
+                displayStr += (hours < 10 ? "0" : "") + hours + ":";
+                displayStr += (minutes < 10 ? "0" : "") + minutes + ":";
+                displayStr += (seconds < 10 ? "0" : "") + seconds;
+                
+                document.getElementById("countdown").innerHTML = displayStr;
+            }
+        }, 1000);
+    </script>
     {% else %}
     <div class="alert alert-info" style="margin-top: 1rem;">
         There is currently no active weekly problem. Take a break or check out the Resources!

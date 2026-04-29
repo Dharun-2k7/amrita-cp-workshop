@@ -39,7 +39,8 @@
             {% if current_user.is_admin %}
             <li><a href="{{ url_for('main.admin_dashboard') }}" class="nav-link" style="color: var(--icpc-gold);">Admin</a></li>
             {% endif %}
-            <li><a href="{{ url_for('main.dashboard') }}" class="nav-link">Dashboard</a></li>
+            <li><a href="{{ url_for('main.dashboard') }}" class="nav-link">Problem of the Week</a></li>
+            <li><a href="{{ url_for('main.archives') }}" class="nav-link">Problem Archives</a></li>
             <li><a href="{{ url_for('main.leaderboard') }}" class="nav-link">Leaderboard</a></li>
             <li><a href="{{ url_for('main.logout') }}" class="nav-btn-outline">Logout</a></li>
             {% else %}
@@ -61,7 +62,54 @@
         {% block content %}{% endblock %}
     </div>
 
+    <!-- Footer -->
+    <footer style="border-top: 1px solid var(--glass-border); padding: 3rem 2rem; margin-top: 4rem; background: rgba(0,0,0,0.2);">
+        <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 2rem;">
+            <div>
+                <h3 style="color: #fff; margin-bottom: 1rem; font-size: 1.2rem;">IOI Vismaya</h3>
+                <p style="color: var(--text-muted); max-width: 300px; font-size: 0.9rem;">
+                    Empowering grade 9-12 students with mathematical thinking and problem-solving skills for the International Olympiad in Informatics.
+                </p>
+            </div>
+            <div style="display: flex; gap: 4rem;">
+                <div>
+                    <h4 style="color: #fff; margin-bottom: 1rem; font-size: 1rem;">Platform</h4>
+                    <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.5rem;">
+                        <li><a href="{{ url_for('main.home') }}" style="color: var(--text-muted); text-decoration: none; font-size: 0.9rem;">Home</a></li>
+                        <li><a href="{{ url_for('main.dashboard') }}" style="color: var(--text-muted); text-decoration: none; font-size: 0.9rem;">Problem of the Week</a></li>
+                        <li><a href="{{ url_for('main.archives') }}" style="color: var(--text-muted); text-decoration: none; font-size: 0.9rem;">Problem Archives</a></li>
+                        <li><a href="{{ url_for('main.leaderboard') }}" style="color: var(--text-muted); text-decoration: none; font-size: 0.9rem;">Leaderboard</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: #fff; margin-bottom: 1rem; font-size: 1rem;">Community</h4>
+                    <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.5rem;">
+                        <li><a href="{{ url_for('main.team') }}" style="color: var(--text-muted); text-decoration: none; font-size: 0.9rem;">Team</a></li>
+                        <li><a href="{{ url_for('main.resources') }}" style="color: var(--text-muted); text-decoration: none; font-size: 0.9rem;">Resources</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; color: var(--text-muted); font-size: 0.8rem; margin-top: 3rem; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 1.5rem;">
+            &copy; 2026 IOI Vismaya. All rights reserved.
+        </div>
+    </footer>
+
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script>
+        // Scroll Animations logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.scroll-animate').forEach(el => observer.observe(el));
+        });
+    </script>
 </body>
 
 </html>

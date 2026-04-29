@@ -39,28 +39,20 @@ body {
     overflow-x: hidden;
 }
 
-/* Animated Background Orbs */
+/* Animated Background Grid & Math Theme */
 .bg-orbs {
-    position: fixed;
-    top: 0; left: 0; width: 100vw; height: 100vh;
-    overflow: hidden;
-    z-index: -1;
+    display: none; /* Hide old orbs */
 }
 
-.orb {
-    position: absolute;
-    border-radius: 50%;
-    opacity: 0.3;
-    animation: float 15s infinite ease-in-out alternate;
+/* Scroll Animations */
+.scroll-animate {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
-
-.orb-1 { width: 400px; height: 400px; background: var(--icpc-gold); top: -10%; left: -10%; animation-delay: 0s; filter: blur(100px); }
-.orb-2 { width: 500px; height: 500px; background: var(--icpc-red); bottom: -20%; right: -10%; animation-delay: -5s; filter: blur(120px); opacity: 0.25; }
-.orb-3 { width: 300px; height: 300px; background: var(--accent-cyan); top: 40%; left: 50%; animation-delay: -10s; filter: blur(90px); }
-
-@keyframes float {
-    0% { transform: translate(0, 0) scale(1); }
-    100% { transform: translate(50px, 50px) scale(1.1); }
+.scroll-animate.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* Animations */
@@ -560,19 +552,19 @@ body {
     .card { padding: 1.5rem; }
 }
 
-/* ===== Premium ICPC Theme Overrides ===== */
+/* ===== Mathematical / Problem Solving Theme ===== */
 :root {
-    --bg: #060708;
-    --bg-card: #111419;
+    --bg: #090e17;
+    --bg-card: #0f1623;
     --line: rgba(255, 255, 255, 0.08);
-    --line-strong: rgba(255, 215, 102, 0.32);
-    --text-soft: #c6c9cf;
-    --icpc-gold: #d6b24d;
-    --icpc-gold-hover: #e7c864;
+    --line-strong: rgba(16, 185, 129, 0.4); /* Matrix green accent */
+    --text-soft: #94a3b8;
+    --icpc-gold: #10b981; /* Changed to mathematical green */
+    --icpc-gold-hover: #34d399;
 }
 
 body {
-    background: radial-gradient(circle at 20% -10%, rgba(214, 178, 77, 0.16), transparent 45%), var(--bg);
+    background: var(--bg);
 }
 
 body::before {
@@ -580,11 +572,20 @@ body::before {
     position: fixed;
     inset: 0;
     background-image:
-        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-    background-size: 40px 40px;
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 30px 30px; /* Graph paper style */
     pointer-events: none;
     z-index: -2;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at 50% 50%, transparent 20%, var(--bg) 100%);
+    pointer-events: none;
+    z-index: -1;
 }
 
 .navbar {
@@ -751,9 +752,9 @@ body::before {
 }
 
 .feature-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 1rem;
+    display: flex;
+    flex-direction: column; /* Vertical stack as requested */
+    gap: 1.5rem;
 }
 
 .feature-item h3 {

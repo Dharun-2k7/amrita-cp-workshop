@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="dashboard-head animate-up delay-1">
+    <h2>Problem Archives</h2>
+    <div style="font-size: 1.1rem; color: var(--text-muted); margin-bottom: 1rem;">
+        Review and practice previously active problems.
+    </div>
+</div>
+
+<div class="card animate-up delay-2">
+    {% if problems %}
+    <div style="display: flex; flex-direction: column; gap: 2rem;">
+        {% for problem in problems %}
+        <div style="background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 12px; border-left: 4px solid var(--icpc-gold);">
+            <h3 style="margin-bottom: 1rem; color: #fff;">{{ problem.title }}</h3>
+            <div class="problem-box" style="margin-top: 0; background: rgba(0,0,0,0.4); border-left: none;">
+                {{ problem.statement | safe }}
+            </div>
+            
+            <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--glass-border);">
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.5rem;">For practice purposes only. (Submitting answers to archives is currently disabled in this view, but you can test your code locally!)</p>
+                <!-- If you later want them to submit past problems, you can add a form here pointing to a new route -->
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="alert alert-info">
+        There are no past problems in the archives yet. Check back later!
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

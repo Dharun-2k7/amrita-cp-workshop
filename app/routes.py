@@ -4,6 +4,7 @@ from app import db, bcrypt
 from app.models import User, Problem, Submission
 from app.utils import generate_otp, send_otp_email
 import re
+from datetime import datetime, timezone
 
 main = Blueprint('main', __name__)
 
@@ -197,7 +198,21 @@ def logout():
 @main.route('/dashboard', methods=['GET', 'POST'])
 @login_required
 def dashboard():
+    now = datetime.now(timezone.utc)
+    
+    # Lazy activation check: Are there any problems scheduled for the past that aren't active yet?
+    past_scheduled = Problem.query.filter(Problem.scheduled_for <= now, Problem.is_active == False).order_by(Problem.scheduled_for.desc()).first()
+    if past_scheduled:
+        Problem.query.update({Problem.is_active: False})
+        past_scheduled.is_active = True
+        past_scheduled.scheduled_for = None
+        db.session.commit()
+        
     active_problem = Problem.query.filter_by(is_active=True).first()
+    scheduled_problem = None
+    
+    if not active_problem:
+        scheduled_problem = Problem.query.filter(Problem.scheduled_for > now).order_by(Problem.scheduled_for.asc()).first()
     
     # Check if user already solved it
     already_solved = False
@@ -254,7 +269,8 @@ def dashboard():
     return render_template('dashboard.html', 
                            problem=active_problem, 
                            already_solved=already_solved,
-                           submissions=user_submissions)
+                           submissions=user_submissions,
+                           scheduled_problem=scheduled_problem)
 
 @main.route('/leaderboard')
 def leaderboard():
@@ -303,6 +319,17 @@ def team():
 def resources():
     return render_template('resources.html')
 
+@main.route('/archives')
+def archives():
+    now = datetime.now(timezone.utc)
+    # Past problems are those that are not active and either have no schedule or a schedule in the past
+    past_problems = Problem.query.filter(
+        db.or_(Problem.scheduled_for == None, Problem.scheduled_for <= now),
+        Problem.is_active == False
+    ).order_by(Problem.id.desc()).all()
+    
+    return render_template('archives.html', problems=past_problems)
+
 @main.route('/admin', methods=['GET', 'POST'])
 @login_required
 def admin_dashboard():
@@ -314,16 +341,30 @@ def admin_dashboard():
         title = request.form.get('title')
         statement = request.form.get('statement')
         correct_answer = request.form.get('correct_answer')
+        scheduled_for_str = request.form.get('scheduled_for')
         
         if title and statement and correct_answer:
-            # Deactivate all other problems when a new one is made active
-            Problem.query.update({Problem.is_active: False})
+            is_active = True
+            scheduled_for = None
+            
+            if scheduled_for_str:
+                is_active = False
+                try:
+                    scheduled_for = datetime.strptime(scheduled_for_str, '%Y-%m-%dT%H:%M')
+                    scheduled_for = scheduled_for.replace(tzinfo=timezone.utc)
+                except ValueError:
+                    pass
+                    
+            if is_active:
+                # Deactivate all other problems when a new one is made active
+                Problem.query.update({Problem.is_active: False})
             
             new_problem = Problem(
                 title=title,
                 statement=statement,
                 correct_answer=correct_answer,
-                is_active=True
+                is_active=is_active,
+                scheduled_for=scheduled_for
             )
             db.session.add(new_problem)
             db.session.commit()
