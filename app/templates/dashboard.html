@@ -10,12 +10,14 @@
         <div class="points-badge">
             ✦ {{ current_user.points }} PTS
         </div>
-        <a href="{{ url_for('main.archives') }}" class="btn nav-btn-outline" style="font-size: 0.9rem; padding: 0.4rem 1rem;">View Problem Archives</a>
+        {# <a href="{{ url_for('main.archives') }}" class="btn nav-btn-outline"
+            style="font-size: 0.9rem; padding: 0.4rem 1rem;">View Problem Archives</a> #}
     </div>
 </div>
 
 <div class="card animate-up delay-2">
-    <h3 style="color: var(--icpc-gold); font-size: 1.8rem; margin-bottom: 0.5rem; letter-spacing: -0.5px;">Active Challenge</h3>
+    <h3 style="color: var(--icpc-gold); font-size: 1.8rem; margin-bottom: 0.5rem; letter-spacing: -0.5px;">Active
+        Challenge</h3>
 
     {% if problem %}
     <div style="font-size: 1.4rem; font-weight: 700; color: var(--text-main); margin-bottom: 1rem;">
@@ -62,7 +64,8 @@
                 <tbody>
                     {% for sub in submissions %}
                     <tr>
-                        <td style="color: var(--text-muted); font-family: monospace;">{{ sub.submission_time | utc_to_ist }}</td>
+                        <td style="color: var(--text-muted); font-family: monospace;">{{ sub.submission_time |
+                            utc_to_ist }}</td>
                         <td style="font-weight: 500;">{{ sub.answer }}</td>
                         <td>
                             {% if sub.is_correct %}
@@ -83,7 +86,8 @@
     {% elif scheduled_problem %}
     <div class="alert alert-info" style="margin-top: 1rem; text-align: center; padding: 3rem;">
         <h3 style="color: var(--text-main); margin-bottom: 1rem;">Next Problem Unlocks In</h3>
-        <div id="countdown" style="font-size: 3rem; font-family: monospace; font-weight: 800; color: var(--icpc-gold); letter-spacing: 4px; text-shadow: 0 0 20px rgba(16, 185, 129, 0.4);">
+        <div id="countdown"
+            style="font-size: 3rem; font-family: monospace; font-weight: 800; color: var(--icpc-gold); letter-spacing: 4px; text-shadow: 0 0 20px rgba(16, 185, 129, 0.4);">
             --:--:--
         </div>
         <p style="color: var(--text-muted); margin-top: 1rem;">Get ready to solve!</p>
@@ -91,11 +95,11 @@
     <script>
         // Countdown timer logic
         const scheduledTime = new Date("{{ scheduled_problem.scheduled_for.isoformat() }}Z").getTime();
-        
-        const countdownInterval = setInterval(function() {
+
+        const countdownInterval = setInterval(function () {
             const now = new Date().getTime();
             const distance = scheduledTime - now;
-            
+
             if (distance < 0) {
                 clearInterval(countdownInterval);
                 document.getElementById("countdown").innerHTML = "00:00:00";
@@ -105,13 +109,13 @@
                 const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                
+
                 let displayStr = "";
                 if (days > 0) displayStr += days + "d ";
                 displayStr += (hours < 10 ? "0" : "") + hours + ":";
                 displayStr += (minutes < 10 ? "0" : "") + minutes + ":";
                 displayStr += (seconds < 10 ? "0" : "") + seconds;
-                
+
                 document.getElementById("countdown").innerHTML = displayStr;
             }
         }, 1000);
