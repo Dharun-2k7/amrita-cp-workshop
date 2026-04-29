@@ -34,6 +34,12 @@
     padding: 0;
 }
 
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+}
+
 body {
     font-family: var(--font-family);
     background: linear-gradient(135deg, #050505 0%, #0a0f1c 50%, #030712 100%);
@@ -41,7 +47,6 @@ body {
     color: var(--text-main);
     line-height: 1.6;
     min-height: 100vh;
-    overflow-x: hidden;
 }
 
 /* Animated Background Grid & Math Theme */
@@ -1461,6 +1466,42 @@ footer a {
 
 footer a:hover {
     color: var(--icpc-gold) !important;
+}
+
+@media (max-width: 768px) {
+    /* Auto-glow for mobile devices since hover is unavailable */
+    .sleek-item .item-number {
+        animation: mobilePulseText 3s infinite alternate;
+        color: var(--icpc-gold);
+        -webkit-text-stroke: 0;
+    }
+    
+    .sleek-item .item-content {
+        border-left-color: var(--icpc-gold);
+    }
+    
+    .roadmap-content {
+        animation: mobilePulseBorder 3s infinite alternate;
+    }
+    
+    .roadmap-bubble {
+        animation: mobilePulseShadow 3s infinite alternate;
+    }
+    
+    @keyframes mobilePulseText {
+        0% { text-shadow: 0 0 5px rgba(16, 185, 129, 0.1); opacity: 0.8; }
+        100% { text-shadow: 0 0 20px rgba(16, 185, 129, 0.5); opacity: 1; }
+    }
+    
+    @keyframes mobilePulseBorder {
+        0% { border-color: rgba(255, 255, 255, 0.05); transform: translateX(0); }
+        100% { border-color: rgba(251, 191, 36, 0.3); transform: translateX(5px); }
+    }
+    
+    @keyframes mobilePulseShadow {
+        0% { box-shadow: 0 0 5px rgba(0,0,0,0.5); }
+        100% { box-shadow: 0 0 15px rgba(251, 191, 36, 0.4); transform: scale(1.05); }
+    }
 }
 
 /* Roadmap UI */
