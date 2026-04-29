@@ -21,10 +21,10 @@ def send_otp_email(user_email, otp):
     # Real email sending using SMTP
     try:
         msg = EmailMessage()
-        msg['Subject'] = 'ICPC Club Registration - Verify Your Email'
+        msg['Subject'] = 'IOI Vismaya Registration - Verify Your Email'
         msg['From'] = current_app.config['MAIL_USERNAME']
         msg['To'] = user_email
-        msg.set_content(f'''Welcome to the ICPC Club Platform!
+        msg.set_content(f'''Welcome to the IOI Vismaya Platform!
         
 Your email verification code is: {otp}
 
